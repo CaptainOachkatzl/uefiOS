@@ -4,3 +4,4 @@ mkdir Bios/mnt_app
 cp Bios/app.disk Bios/mnt_app
 sudo mount Bios/app.disk Bios/mnt_app
 sudo cp kernel/main.efi Bios/mnt_app
+sudo cp Bios/startup.nsh Bios/mnt_app
