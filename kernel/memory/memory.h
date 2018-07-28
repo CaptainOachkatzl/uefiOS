@@ -26,7 +26,7 @@ void ExecuteMemoryMap()
 	}
 	else
 	{
-		Print(L"got memory map.\n");
+		Print(L"got memory map\n");
 		return;
 	}
 }
@@ -56,7 +56,7 @@ void * palloc(UINTN pageCount)
 	}
 	else
 	{
-		Print(L"memory page successfully allocated.\n");
+		Print(L"memory page successfully allocated\n");
 		return handle;
 	}
 }
@@ -80,7 +80,7 @@ void * malloc(UINTN poolSize)
 	}
 	else
 	{
-		Print(L"memory pool successfully allocated.\n");
+		Print(L"memory pool successfully allocated\n");
 		return handle;
 	}
 }
@@ -97,7 +97,7 @@ void pfree(void * page, UINTN pageCount)
 	}
 	else
 	{
-		Print(L"memory pages successfully freed.\n");
+		Print(L"memory pages successfully freed\n");
 	}
 }
 
@@ -113,6 +113,6 @@ void free(void * pool)
 	}
 	else
 	{
-		Print(L"memory pool successfully freed.\n");
+		Print(L"memory pool successfully freed\n");
 	}
 }
