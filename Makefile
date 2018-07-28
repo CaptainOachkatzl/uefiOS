@@ -5,7 +5,6 @@ TARGET          = hello.efi
 
 EFIINC          = /usr/include/efi
 EFIINCS         = -I$(EFIINC) -I$(EFIINC)/$(ARCH) -I$(EFIINC)/protocol
-LIB             = /usr/lib
 EFILIB          = /usr/lib
 EFI_CRT_OBJS    = $(EFILIB)/crt0-efi-$(ARCH).o
 EFI_LDS         = $(EFILIB)/elf_$(ARCH)_efi.lds
@@ -17,7 +16,7 @@ ifeq ($(ARCH),x86_64)
 endif
 
 LDFLAGS         = -nostdlib -znocombreloc -T $(EFI_LDS) -shared \
-		  -Bsymbolic -L $(EFILIB) -L $(LIB) $(EFI_CRT_OBJS) 
+		  -Bsymbolic -L $(EFILIB) $(EFI_CRT_OBJS) 
 
 all: $(TARGET)
 
@@ -28,3 +27,5 @@ hello.so: $(OBJS)
 	objcopy -j .text -j .sdata -j .data -j .dynamic \
 		-j .dynsym  -j .rel -j .rela -j .reloc \
 		--target=efi-app-$(ARCH) $^ $@
+
+	@echo 	done building target
