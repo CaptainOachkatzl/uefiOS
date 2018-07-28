@@ -34,3 +34,5 @@
 *.efi
 
 Bios/app\.disk
+
+app\.ovmf\.log
