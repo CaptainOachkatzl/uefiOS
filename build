@@ -1,0 +1,4 @@
+bash DeleteImage
+make -C kernel/
+bash CreateImage
+bash CleanUpTemp

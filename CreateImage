@@ -1,10 +1,6 @@
-bash DeleteImage
-
 dd if=/dev/zero of=Bios/app.disk bs=1 count=1 seek=$(( (128 * 1024) - 1))
 sudo mkfs.vfat Bios/app.disk
 mkdir Bios/mnt_app
 cp Bios/app.disk Bios/mnt_app
 sudo mount Bios/app.disk Bios/mnt_app
-sudo cp main.efi Bios/mnt_app
-
-bash CleanUpTemp
+sudo cp kernel/main.efi Bios/mnt_app
