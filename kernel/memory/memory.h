@@ -31,7 +31,7 @@ void ExecuteMemoryMap()
 	}
 }
 
-void * AllocateMemoryPages(UINTN pageCount)
+void * palloc(UINTN pageCount)
 {
 	EFI_STATUS status;
 	void * handle;
@@ -61,7 +61,7 @@ void * AllocateMemoryPages(UINTN pageCount)
 	}
 }
 
-void * AllocateMemoryPool(UINTN poolSize)
+void * malloc(UINTN poolSize)
 {
 	EFI_STATUS status;
 	void * handle;
@@ -85,7 +85,7 @@ void * AllocateMemoryPool(UINTN poolSize)
 	}
 }
 
-void FreeMemoryPages(void * page, UINTN pageCount)
+void pfree(void * page, UINTN pageCount)
 {
 	EFI_STATUS status;
 	Print(L"freeing memory pages\n");
@@ -101,7 +101,7 @@ void FreeMemoryPages(void * page, UINTN pageCount)
 	}
 }
 
-void FreeMemoryPool(void * pool)
+void free(void * pool)
 {
 	EFI_STATUS status;
 	Print(L"freeing memory pool\n");
