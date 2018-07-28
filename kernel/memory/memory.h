@@ -25,18 +25,12 @@ void ExecuteMemoryMap()
 		Print(L"invalid memory map\n");
 		return;
 	}
-	else
-	{
-		Print(L"got memory map\n");
-		return;
-	}
 }
 
 void * palloc(UINTN pageCount)
 {
 	EFI_STATUS status;
 	void * handle;
-	Print(L"allocating memory page\n");
 	status = uefi_call_wrapper(BS->AllocatePages, 4, AllocateAnyPages, 
 		EfiLoaderData, pageCount, &handle);
 
@@ -57,7 +51,6 @@ void * palloc(UINTN pageCount)
 	}
 	else
 	{
-		Print(L"memory page successfully allocated\n");
 		return handle;
 	}
 }
@@ -66,7 +59,6 @@ void * malloc(UINTN poolSize)
 {
 	EFI_STATUS status;
 	void * handle;
-	Print(L"allocating memory pool\n");
 	status = uefi_call_wrapper(BS->AllocatePool, 3, EfiLoaderData, poolSize, &handle);
 
 	if(status == EFI_OUT_OF_RESOURCES)
@@ -81,7 +73,6 @@ void * malloc(UINTN poolSize)
 	}
 	else
 	{
-		Print(L"memory pool successfully allocated\n");
 		return handle;
 	}
 }
@@ -89,31 +80,21 @@ void * malloc(UINTN poolSize)
 void pfree(void * page, UINTN pageCount)
 {
 	EFI_STATUS status;
-	Print(L"freeing memory pages\n");
 	status = uefi_call_wrapper(BS->FreePages, 2, page, pageCount);
 
 	if(status == EFI_INVALID_PARAMETER)
 	{
 		Print(L"invalid page pointer\n");
 	}
-	else
-	{
-		Print(L"memory pages successfully freed\n");
-	}
 }
 
 void free(void * pool)
 {
 	EFI_STATUS status;
-	Print(L"freeing memory pool\n");
 	status = uefi_call_wrapper(BS->FreePool, 1, pool);
 
 	if(status == EFI_INVALID_PARAMETER)
 	{
 		Print(L"invalid pool pointer\n");
-	}
-	else
-	{
-		Print(L"memory pool successfully freed\n");
 	}
 }

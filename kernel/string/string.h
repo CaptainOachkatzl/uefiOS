@@ -30,9 +30,7 @@ CHAR16 * append_newline(CHAR16 * string)
 		allocated[i] = string[i];
 	}
 	
-	Print(L"appending new line\n");
 	allocated[size] = L'\n';
-	Print(L"appending null termination\n");
 	allocated[size + 1] = 0x0000;
 
 	return allocated;
@@ -40,6 +38,5 @@ CHAR16 * append_newline(CHAR16 * string)
 
 void free_string(CHAR16 * string)
 {
-	Print(L"freeing string memory\n");
 	free((void*)string);
 }
