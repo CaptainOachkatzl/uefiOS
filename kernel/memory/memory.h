@@ -1,6 +1,7 @@
+#pragma once
+
 #include <efi.h>
 #include <efilib.h>
-#include <stdlib.h>
 
 void ExecuteMemoryMap()
 {
