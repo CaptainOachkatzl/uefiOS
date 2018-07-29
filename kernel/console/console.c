@@ -9,7 +9,6 @@ void console_write(CHAR16 * string)
 
 void console_writeline(CHAR16 * string)
 {
-	CHAR16* withNewLine = append_newline(string);
-	console_write(withNewLine);
-	free_string(withNewLine);
+	console_write(string);
+	console_write(L"\n");
 }
