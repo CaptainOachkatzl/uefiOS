@@ -1,2 +1,2 @@
 fs0:
-main.efi
+bitannihilation.efi

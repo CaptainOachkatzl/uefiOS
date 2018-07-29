@@ -1,10 +1,14 @@
 ARCH            = $(shell uname -m | sed s,i[3456789]86,ia32,)
 
-OUTPUT 			= ../bin
+SRC				= kernel
+OUTPUT 			= bin
 
-SRC				= main.c
-OBJS            = main.o
-TARGET          = main.efi
+SOURCES 		:= $(shell find $(SRC) -name '*.c')
+SRCFOLDER		:= $(subst $(SRC)/,,$(SOURCES))
+# replace .c with .o appendix
+OBJECTS 		:= $(addprefix $(OUTPUT)/, $(SRCFOLDER:%.c=%.o))
+OBJSRIPTS		= bitannihilation.so
+TARGET          = bitannihilation.efi
 
 EFIINC          = /usr/include/efi
 EFIINCS         = -I$(EFIINC) -I$(EFIINC)/$(ARCH) -I$(EFIINC)/protocol
@@ -21,17 +25,19 @@ endif
 LDFLAGS         = -nostdlib -znocombreloc -T $(EFI_LDS) -shared \
 		  -Bsymbolic -L $(EFILIB) $(EFI_CRT_OBJS) 
 
+# read from bottom up
+
 all: $(OUTPUT)/$(TARGET)
 
-$(OUTPUT)/main.so: $(OUTPUT)/$(OBJS)
-	ld $(LDFLAGS) $^ -o $@ -lefi -lgnuefi
-
-$(OUTPUT)/$(OBJS): $(SRC)
-	cc $(CFLAGS) -c $^ -o $@
-
-$(OUTPUT)/%.efi: $(OUTPUT)/%.so
+$(OUTPUT)/%.efi: $(OUTPUT)/$(OBJSRIPTS)
 	objcopy -j .text -j .sdata -j .data -j .dynamic \
 		-j .dynsym  -j .rel -j .rela -j .reloc \
 		--target=efi-app-$(ARCH) $^ $@
-
 	@echo 	done building targets
+
+$(OUTPUT)/$(OBJSRIPTS): $(OBJECTS)
+	ld $(LDFLAGS) $^ -o $@ -lefi -lgnuefi
+
+$(OUTPUT)/%.o: $(SRC)/%.c
+	@mkdir -p $(@D)
+	cc $(CFLAGS) -I$(SRC) -c $< -o $@

@@ -1,5 +1,4 @@
 #include "memory/memory.h"
-#include "string/string.h"
 #include "console/console.h"
 
 #include <efi.h>
@@ -11,7 +10,7 @@ efi_main (EFI_HANDLE ImageHandle, EFI_SYSTEM_TABLE *SystemTable)
 {
 	InitializeLib(ImageHandle, SystemTable);
 
-	console_writeline(L"writes a line");
+	console_writeline(L"test a line");
 	console_writeline(L"writes another line");
 
 	return EFI_SUCCESS;
