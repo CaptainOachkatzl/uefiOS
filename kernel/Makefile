@@ -1,5 +1,8 @@
 ARCH            = $(shell uname -m | sed s,i[3456789]86,ia32,)
 
+OUTPUT 			= ../bin
+
+SRC				= main.c
 OBJS            = main.o
 TARGET          = main.efi
 
@@ -18,14 +21,17 @@ endif
 LDFLAGS         = -nostdlib -znocombreloc -T $(EFI_LDS) -shared \
 		  -Bsymbolic -L $(EFILIB) $(EFI_CRT_OBJS) 
 
-all: $(TARGET)
+all: $(OUTPUT)/$(TARGET)
 
-main.so: $(OBJS)
-	ld $(LDFLAGS) $(OBJS) -o $@ -lefi -lgnuefi
+$(OUTPUT)/main.so: $(OUTPUT)/$(OBJS)
+	ld $(LDFLAGS) $^ -o $@ -lefi -lgnuefi
 
-%.efi: %.so
+$(OUTPUT)/$(OBJS): $(SRC)
+	cc $(CFLAGS) -c $^ -o $@
+
+$(OUTPUT)/%.efi: $(OUTPUT)/%.so
 	objcopy -j .text -j .sdata -j .data -j .dynamic \
 		-j .dynsym  -j .rel -j .rela -j .reloc \
 		--target=efi-app-$(ARCH) $^ $@
 
-	@echo 	done building target
+	@echo 	done building targets
