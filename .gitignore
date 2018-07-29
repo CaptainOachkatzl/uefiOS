@@ -33,6 +33,5 @@
 
 *.efi
 
-bios/app\.disk
-
+app\.disk
 app\.ovmf\.log
