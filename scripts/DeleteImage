@@ -1,1 +1,3 @@
-rm -f bios/app.disk
+APPDSK='bios/app.disk'
+
+rm -f $APPDSK

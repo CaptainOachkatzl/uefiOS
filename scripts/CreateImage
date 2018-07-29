@@ -1,7 +1,12 @@
-dd if=/dev/zero of=bios/app.disk bs=1 count=1 seek=$(( (128 * 1024) - 1))
-sudo mkfs.vfat bios/app.disk
-mkdir bios/mnt_app
-cp bios/app.disk bios/mnt_app
-sudo mount bios/app.disk bios/mnt_app
-sudo cp kernel/main.efi bios/mnt_app
-sudo cp bios/startup.nsh bios/mnt_app
+BIOS='bios'
+KERNEL='kernel'
+APPDSK="$BIOS/app.disk"
+MNT="$BIOS/mnt_app"
+
+dd if=/dev/zero of=$APPDSK bs=1 count=1 seek=$(( (128 * 1024) - 1))
+sudo mkfs.vfat $APPDSK
+mkdir $MNT
+cp $APPDSK $MNT
+sudo mount $APPDSK $MNT
+sudo cp $KERNEL/main.efi $MNT
+sudo cp $BIOS/startup.nsh $MNT
