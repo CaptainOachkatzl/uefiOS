@@ -1,1 +1,1 @@
-qemu-system-x86_64 -cpu qemu64 -bios Bios/bios.bin -drive file=Bios/app.disk,format=raw -global isa-debugcon.iobase=0x402 -debugcon file:app.ovmf.log
+qemu-system-x86_64 -cpu qemu64 -bios bios/bios.bin -drive file=bios/app.disk,format=raw -global isa-debugcon.iobase=0x402 -debugcon file:app.ovmf.log

@@ -1,0 +1,2 @@
+sudo umount -l bios/mnt_app
+rm -rf bios/mnt_app

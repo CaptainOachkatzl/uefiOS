@@ -1,4 +1,4 @@
-bash DeleteImage
+bash scripts/DeleteImage
 make -B -C kernel/
-bash CreateImage
-bash CleanUpTemp
+bash scripts/CreateImage
+bash scripts/CleanUpTemp
