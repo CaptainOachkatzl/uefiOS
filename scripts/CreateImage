@@ -1,5 +1,5 @@
 BIOS='bios'
-BIN='bin'
+BIN='bin/bitannihilation.efi'
 APPDSK="$BIOS/app.disk"
 MNT="$BIOS/mnt_app"
 
@@ -8,5 +8,5 @@ sudo mkfs.vfat $APPDSK
 mkdir $MNT
 cp $APPDSK $MNT
 sudo mount $APPDSK $MNT
-sudo cp $BIN/main.efi $MNT
+sudo cp $BIN $MNT
 sudo cp $BIOS/startup.nsh $MNT

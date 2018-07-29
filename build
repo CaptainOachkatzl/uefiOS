@@ -1,4 +1,7 @@
+echo deleting old bios image
 bash scripts/DeleteImage
-make -B -C kernel/
+sudo make -B
+echo creating bios image
 bash scripts/CreateImage
 bash scripts/CleanUpTemp
+echo successfully created bios image
