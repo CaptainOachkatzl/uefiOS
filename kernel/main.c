@@ -12,7 +12,7 @@ efi_main (EFI_HANDLE ImageHandle, EFI_SYSTEM_TABLE *SystemTable)
 {
 	InitializeLib(ImageHandle, SystemTable);
 
-	UINTN maxMemory = memory_check(32*1024*1024, 256*1024*1024, 8*1024*1024);
+	UINTN maxMemory = memory_check(0, mega(256), mega(16));
 
 	CHAR16 const * unit = convert_unit_bits_bytes(&maxMemory);
 	console_writeline(L"maximum allocated memory: %d%s", maxMemory, unit);
