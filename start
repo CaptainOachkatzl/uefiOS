@@ -3,4 +3,4 @@ LOGDIR='log'
 
 rm -rf $LOGDIR
 mkdir $LOGDIR
-qemu-system-x86_64 -cpu qemu64 -bios $BIOS/bios.bin -drive file=$BIOS/app.disk,format=raw -global isa-debugcon.iobase=0x402 -debugcon file:$LOGDIR/app.ovmf.log
+qemu-system-x86_64 -cpu qemu64 -m 256M -bios $BIOS/bios.bin -drive file=$BIOS/app.disk,format=raw -global isa-debugcon.iobase=0x402 -debugcon file:$LOGDIR/app.ovmf.log
