@@ -4,23 +4,25 @@
 
 UINTN memory_check(UINTN min, UINTN max, UINTN step)
 {
-	if(min == 0 || min >= max)
+	if(min >= max)
 		return 0;	// invalid parameters
 	
 	UINTN maxAllocated = 0;	
 	
-	int i;
-	for(i = min; i <= max; i += step)
+	if(min == 0)
+		min = step;
+
+	for(; min <= max; min += step)
 	{
-		void * bigarray = malloc(i);
+		void * bigarray = malloc(min);
 		if(bigarray)
 		{
 			free(bigarray);
-			console_writeline(L"allocated %dB of memory", i);
-			maxAllocated = i;
+			console_writeline(L"allocated %dB of memory", min);
+			maxAllocated = min;
 		}
 		else
-			console_writeline(L"could not allocate %dB of memory", i);
+			console_writeline(L"could not allocate %dB of memory", min);
 	}
 
 	return maxAllocated;
