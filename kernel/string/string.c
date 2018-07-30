@@ -2,6 +2,18 @@
 #include "../memory/memory.h"
 #include <efilib.h>
 
+CHAR16 * allocate_string(CHAR16 const * string)
+{
+	UINTN length = get_string_length(string);
+	CHAR16 * allocated = (CHAR16 *)malloc((length + 1) * sizeof(CHAR16));
+	for (int i = 0; i < length + 1; i++)
+	{
+		allocated[i] = string[i];
+	}
+
+	return allocated;
+}
+
 void free_string(CHAR16 * string)
 {
 	free((void*)string);
