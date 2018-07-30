@@ -1,10 +1,10 @@
 #include "check.h"
 #include "memory.h"
-#include <efilib.h>
+#include "../console/console.h"
 
 UINTN memory_check(UINTN min, UINTN max, UINTN step)
 {
-	if(min >= max)
+	if(min == 0 || min >= max)
 		return 0;	// invalid parameters
 	
 	int i;
@@ -13,12 +13,15 @@ UINTN memory_check(UINTN min, UINTN max, UINTN step)
 		void * bigarray = malloc(i);
 		if(bigarray)
 		{
-			Print(L"allocated %dB of memory\n", i);
+			console_writeline(L"allocated %dB of memory", i);
 			free(bigarray);
 		}
 		else
-			Print(L"could not allocate %dB of memory\n", i);
+			console_writeline(L"could not allocate %dB of memory", i);
 	}
+	
+	if(i == min)
+		return 0;
 
-	return 1;
+	return i - step;
 }
