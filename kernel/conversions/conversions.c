@@ -25,3 +25,19 @@ CHAR16 const * convert_unit_bits_bytes(UINTN * b)
 
 	return unit;
 }
+
+UINTN kilo(UINTN value)
+{
+	return value * 1024;
+}
+
+UINTN mega(UINTN value)
+{
+	return value * 1024 * 1024;
+}
+
+UINTN giga(UINTN value)
+{
+	return value * 1024 * 1024 * 1024;
+}
+
