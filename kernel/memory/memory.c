@@ -1,10 +1,11 @@
 #include "memory.h"
+#include "../console/console.h"
 #include <efilib.h>
 
 void ExecuteMemoryMap()
 {
 	EFI_STATUS status;
-	Print(L"getting memory map\n");
+	console_writeline(L"getting memory map");
 	UINTN requiredSize;
 	EFI_MEMORY_DESCRIPTOR * memoryMap = 0;
 	UINTN mapKey;
@@ -15,12 +16,12 @@ void ExecuteMemoryMap()
 
 	if(status == EFI_BUFFER_TOO_SMALL)
 	{
-		Print(L"buffer too small\n");
+		console_writeline(L"buffer too small");
 		return;
 	}
 	else if(status == EFI_INVALID_PARAMETER)
 	{
-		Print(L"invalid memory map\n");
+		console_writeline(L"invalid memory map");
 		return;
 	}
 }
@@ -34,17 +35,17 @@ void * palloc(UINTN pageCount)
 
 	if(status == EFI_OUT_OF_RESOURCES)
 	{
-		Print(L"out of resources for page\n");
+		console_writeline(L"out of resources for page");
 		return 0;
 	}
 	else if(status == EFI_INVALID_PARAMETER)
 	{
-		Print(L"invalid page type\n");
+		console_writeline(L"invalid page type");
 		return 0;
 	}
 	else if(status == EFI_NOT_FOUND)
 	{
-		Print(L"could not find requested pages\n");
+		console_writeline(L"could not find requested pages");
 		return 0;
 	}
 	else
@@ -61,12 +62,12 @@ void * malloc(UINTN poolSize)
 
 	if(status == EFI_OUT_OF_RESOURCES)
 	{
-		Print(L"out of resources for pool\n");
+		console_writeline(L"out of resources for pool");
 		return 0;
 	}
 	else if(status == EFI_INVALID_PARAMETER)
 	{
-		Print(L"invalid pool type\n");
+		console_writeline(L"invalid pool type");
 		return 0;
 	}
 	else
@@ -82,7 +83,7 @@ void pfree(void * page, UINTN pageCount)
 
 	if(status == EFI_INVALID_PARAMETER)
 	{
-		Print(L"invalid page pointer\n");
+		console_writeline(L"invalid page pointer");
 	}
 }
 
@@ -93,6 +94,6 @@ void free(void * pool)
 
 	if(status == EFI_INVALID_PARAMETER)
 	{
-		Print(L"invalid pool pointer\n");
+		console_writeline(L"invalid pool pointer");
 	}
 }
