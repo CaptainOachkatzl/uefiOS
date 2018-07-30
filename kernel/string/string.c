@@ -2,7 +2,12 @@
 #include "../memory/memory.h"
 #include <efilib.h>
 
-UINTN get_string_length(CHAR16 * string)
+void free_string(CHAR16 * string)
+{
+	free((void*)string);
+}
+
+UINTN get_string_length(CHAR16 const * string)
 {
 	UINTN size = 0;
 	while (string[size] != 0)
@@ -34,9 +39,4 @@ CHAR16 * append_newline(CHAR16 * string)
 	allocated[size + 1] = 0x0000;
 
 	return allocated;
-}
-
-void free_string(CHAR16 * string)
-{
-	free((void*)string);
 }
