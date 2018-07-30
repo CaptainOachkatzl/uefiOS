@@ -33,8 +33,16 @@ void test_memory()
 void test_string_allocation()
 {
 	CHAR16 * string = allocate_string(L"das ist ein test");
+	UINTN stringLength = get_string_length(string);
 	console_writeline(string);
 	string[0] = L'w';
 	console_writeline(string);
+
+	UINTN newStringLength = get_string_length(string);
+	console_writeline(L"string length = %d", newStringLength);
+
+	if(stringLength != newStringLength)
+		console_writeline(L"string size changed!");
+
 	free_string(string);
 }
